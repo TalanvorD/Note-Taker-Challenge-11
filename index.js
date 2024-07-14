@@ -2,7 +2,7 @@ const router = require('express').Router(); // Declaring requirements and global
 const path = require('path');
 const fs = require('fs');
 const uuid = require('uuid');
-const dbPath = path.join(__dirname, '../db/db.json');
+const dbPath = path.join(__dirname, './db/db.json');
 
 const readFile = () => { // Handles reading the existing db.json file and returns a stringified object
     try {
@@ -21,7 +21,6 @@ const writeFile = (data) => { // Handles writing to the db.json file
 
 router.get('/notes', (req, res) => { // Handles requests to directly read the db.json file and sends a stringified response
     try {
-    console.info(`${req.method} request received for db.json`);
     const notes = readFile();
     res.json(notes);
     }
@@ -30,7 +29,6 @@ router.get('/notes', (req, res) => { // Handles requests to directly read the db
 
 router.post('/notes', (req, res) => { // Handles writing a new note to the db.json file
     try {
-    console.info(`${req.method} request received to add a note`);
     const { title, text } = req.body; // Destructuring req.body
     const currentNotes = readFile();
 

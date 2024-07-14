@@ -1,18 +1,17 @@
 const express = require('express'); // Declaring requirements and global variables
 const app = express();
 const path = require('path');
-const apiRoute = require('./routes/index.js');
+const apiRoute = require('./index.js');
 
 const PORT = process.env.PORT || 3001; // Using port 3001
 
 // Middleware for parsing JSON and urlencoded form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//app.use('/api', api);
 
 app.use(express.static('public')); // Our static files
 
-// Not necessarily needed if using a * catchall to reroute to index.html instead of a 404?
+// Not necessarily needed if using a * catchall to reroute to index.html instead of a 404 but I wanted to include it regardless
 // GET Route for index.html
 app.get('/', (req, res) => 
   res.sendFile(path.join(__dirname, '/public/index.html'))
