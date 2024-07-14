@@ -13,21 +13,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public')); // Our static files
 
 // Not necessarily needed if using a * catchall to reroute to index.html instead of a 404?
-/* GET Route for index.html
-app.get('/', (req, res) =>
+// GET Route for index.html
+app.get('/', (req, res) => 
   res.sendFile(path.join(__dirname, '/public/index.html'))
-); */
-
-// GET Route for notes.html
-app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, '/public/notes.html'))
 );
 
-// GET Route for API requests
-app.use('/api', apiRoute);
+app.get('/notes', (req, res) => // GET Route for notes.html
+    res.sendFile(path.join(__dirname, '/public/notes.html'))
+);
 
-// Wildcard route, reroutes to the index.html (Normally this would be a catchall for a 404 but the assignment specifically states to direct to index.html)
-app.get('*', (req, res) =>
+app.use('/api', apiRoute); // GET Route for API requests
+
+app.get('*', (req, res) => // Wildcard route, reroutes to the index.html. Normally this would be a catchall for a 404 but the assignment specifically states to direct to index.html
   res.sendFile(path.join(__dirname, '/public/index.html'))
 );
 
